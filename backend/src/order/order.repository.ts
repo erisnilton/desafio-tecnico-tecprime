@@ -10,6 +10,10 @@ export class OrderRepository {
     await OrderModel.query().insert(OrderModel.toDatabase(order));
   }
 
+  async findAll(user_id: string) {
+    return OrderModel.query().where({ user_id });
+  }
+
   async findById(id: string) {
     return OrderModel.query().findById(id);
   }

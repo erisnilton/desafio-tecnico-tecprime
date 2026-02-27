@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "knex": "NODE_OPTIONS='--import=tsx' knex --knexfile knexfile.ts ",
     "migrate:up": "pnpm run knex migrate:latest",
-    "migrate:down": "pnpm run knex migrate:rollback"
+    "migrate:down": "pnpm run knex migrate:rollback",
+    "seed": "pnpm run knex seed:run"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

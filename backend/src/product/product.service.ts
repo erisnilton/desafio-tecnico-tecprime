@@ -5,7 +5,7 @@ import { UserService } from 'src/user/user.service';
 export class ProductService {
   #logger: Logger;
   #API_URL = 'https://dummyjson.com/products';
-  #SELECT_FIELDS = 'id,title,description,price,stock,images';
+  #SELECT_FIELDS = 'id,title,description,price,stock,images,category';
 
   constructor(private readonly userService: UserService) {
     this.#logger = new Logger(ProductService.name);
@@ -27,6 +27,7 @@ export class ProductService {
           price: product.price,
           stock: product.stock,
           image: product.images[0],
+          category: product.category,
         })),
         count: data.total,
         skip: data.skip,

@@ -23,6 +23,11 @@ export class OrderController {
     return this.orderService.create(data, user_id);
   }
 
+  @Get()
+  async getAllOrders(@UserId() user_id: string) {
+    return this.orderService.getAll(user_id);
+  }
+
   @Get(':id')
   async getOrderById(@Param('id', new ZodValidationPipe(z.uuidv7())) id: string , @UserId() user_id: string) {
     return this.orderService.getById(id, user_id);

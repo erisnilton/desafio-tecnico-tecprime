@@ -41,6 +41,11 @@ export class OrderService {
     };
   }
 
+  async getAll(user_id: string) {
+    await this.userService.ensureUser(user_id);
+    return this.orderRepository.findAll(user_id);
+  }
+
   async getById(id: string, user_id: string) {
     await this.userService.ensureUser(user_id);
     return this.orderRepository.findById(id);

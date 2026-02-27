@@ -5,6 +5,7 @@ import { UserId } from 'src/auth/jwt.decorator';
 import { JwtGuard } from 'src/auth/jwt.guard';
 import { type LoginDTO, LoginDTOSchema } from './dto/login.dto';
 import { UserService } from './user.service';
+import { toPublicUser } from './presenter/public_user.presenter';
 
 @Controller('auth')
 export class AuthController {
@@ -26,6 +27,7 @@ export class AuthController {
   @Get('/me')
   @UseGuards(JwtGuard)
   async getMe(@UserId() user_id: string) {
-    return await this.userService.getMe(user_id);
+    const user = await this.userService.getMe(user_id);
+    return toPublicUser(user);
   }
 }
