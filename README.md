@@ -29,7 +29,7 @@ Para executar o projeto completo localmente, você precisará rodar **backend e 
 
 ```bash
 git clone https://github.com/erisnilton/desafio-tecnico-tecprime
-cd desafio-tecnico
+cd desafio-tecnico-tecprime
 ```
 
 #### 1. Backend (API)
