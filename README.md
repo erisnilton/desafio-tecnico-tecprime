@@ -18,21 +18,28 @@ Para executar o projeto completo localmente, você precisará rodar **backend e 
 
 ### Pré-requisitos
 
-- Node.js 22+
+- Node.js 24+
 - pnpm
 - Docker e Docker Compose
 - Git
 
 ### Executando o projeto
 
-#### 0. Clone o repositório
+#### 1. Clone o repositório
 
 ```bash
 git clone https://github.com/erisnilton/desafio-tecnico-tecprime
 cd desafio-tecnico-tecprime
 ```
 
-#### 1. Backend (API)
+#### 2. Configure do corepack
+
+```bash
+npm install -g corepack@latest
+corepack enable
+```
+
+#### 3. Backend (API)
 
 Consulte a documentação completa em: **[backend/README.md](backend/README.md)**
 
@@ -47,7 +54,7 @@ pnpm run start:dev
 
 A API estará rodando em: http://localhost:3000
 
-#### 2. Frontend (Interface Web)
+#### 4. Frontend (Interface Web)
 
 Consulte a documentação completa em: **[frontend/README.md](frontend/README.md)**
 
