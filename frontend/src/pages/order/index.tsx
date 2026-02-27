@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { OrderService } from "../../services/order/orderService";
 import type { OrderResponse } from "../../services/order/order.model";
 import { toast } from "sonner";
-import UiBtn from "../../components/ui/UiBtn";
 import { Link } from "react-router-dom";
 
 export default function Order() {
