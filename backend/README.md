@@ -1,4 +1,4 @@
-# Desafio Técnico – Desenvolvedor Full Stack | Tecprime
+# Backend
 
 Esta API foi desenvolvida para atender aos requisitos do desafio técnico da Tecprime.
 
@@ -17,8 +17,8 @@ Confira o detalhamento arquitetural em: [ARCHITECTURE.md](./ARCHITECTURE.md)
 1.  **Clonar o repositório:**
 
     ```bash
-    git clone <url-do-repositorio>
-    cd <nome-do-diretorio>
+    git clone git@github.com:erisnilton/desafio-tecnico-tecprime.git
+    cd desafio-tecnico-tecprime/backend
     ```
 
 2.  **Instalar dependências:**
@@ -37,7 +37,7 @@ Confira o detalhamento arquitetural em: [ARCHITECTURE.md](./ARCHITECTURE.md)
 
     ```bash
     pnpm run migrate:up
-    pnpm run knex seed:run
+    pnpm seed
     ```
 
 5.  **Executar a API:**
