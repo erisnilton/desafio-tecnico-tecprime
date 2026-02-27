@@ -1,0 +1,21 @@
+POST http://localhost:3000/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzIxNTM1NTYsImV4cCI6MTc3NDc0NTU1NiwiYXVkIjoiZGVzYWZpby1hcGkiLCJpc3MiOiJkZXNhZmlvLWFwaSIsInN1YiI6IjAxOWM5YzhmLTY2Y2YtNzJlZS1iZjk5LTBlMTNkNTZhNGNkMCJ9.ayHqbwow4nYaAP5pF5jushKOjluaKjIhd54wcpr5wL0
+
+{
+    "name": "Erisnilton",
+    "email": "contato@erisnilton.dev",
+    "address": "123 Main St",
+    "payment_method": "CREDIT_CARD",
+    "products": [
+        {
+            "product_id": "1",
+            "quantity": 2
+        },
+        {
+            "product_id": "2",
+            "quantity": 1
+        }
+    ],
+    "total": 3
+}
