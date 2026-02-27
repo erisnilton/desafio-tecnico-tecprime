@@ -1,73 +1,112 @@
-# React + TypeScript + Vite
+# Frontend 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web desenvolvida com React para consumir a API do desafio técnico.
 
-Currently, two official plugins are available:
+## Visão geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este frontend implementa os fluxos principais de uma loja online:
 
-## React Compiler
+- Login de usuário
+- Listagem de produtos
+- Carrinho com persistência local
+- Checkout com criação de pedido
+- Listagem e detalhe de pedidos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React 19 + TypeScript
+- Vite
+- React Router DOM
+- React Hook Form + Zod
+- Axios
+- UnoCSS
+- Sonner (toasts)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Pré-requisitos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 22+
+- pnpm
+- Backend da API em execução (veja o README do backend)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Como executar
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Acesse a pasta do frontend:**
+
+   ```bash
+   cd frontend
+   ```
+
+
+3. **Instale as dependências:**
+
+   ```bash
+   pnpm install
+   ```
+
+4. **Execute o servidor de desenvolvimento:**
+
+   ```bash
+   pnpm dev
+   ```
+
+5. **Acesse a aplicação:**
+
+   A aplicação estará disponível em [http://localhost:5173](http://localhost:5173)
+
+### Credenciais de teste
+
+Para fazer login, use as credenciais padrão criadas pelo seed do backend:
+
+- **Usuário:** `admin`
+- **Senha:** `admin`
+
+## Scripts disponíveis
+
+- `pnpm dev` — inicia servidor de desenvolvimento com hot reload
+- `pnpm build` — gera build otimizada para produção
+- `pnpm preview` — visualiza a build de produção localmente
+- `pnpm lint` — executa verificação de linting
+
+## Estrutura de pastas (resumo)
+
+```txt
+src/
+  components/     # Componentes reutilizáveis (Navbar, ProductCard, UI)
+  contexts/       # Estado global (Auth e Cart)
+  hooks/          # Hooks customizados
+  layout/         # Layouts de página
+  pages/          # Páginas (Home, Cart, Checkout, Login, Order)
+  services/       # Integração HTTP com API
+  types/          # Tipagens compartilhadas
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Rotas da aplicação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `/` — Home (catálogo)
+- `/cart` — Carrinho
+- `/checkout` — Finalização de compra
+- `/login` — Autenticação
+- `/order` — Listagem de pedidos
+- `/order/:id` — Detalhe de pedido
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Integração com API
+
+- A base URL é definida por `VITE_API_URL`.
+- O token JWT é salvo no `localStorage` após login.
+- As requisições autenticadas enviam `Authorization: Bearer <token>` via interceptor do Axios.
+
+## Fluxo principal
+
+1. Usuário pode acessar a página inicial e visualizar os produtos sem estar logado.
+2. Produtos são exibidos na home, consumidos da API externa `dummyjson.com` via backend.
+3. Ao tentar acessar o carrinho ou checkout sem autenticação, é redirecionado para `/login`.
+4. Após login, usuário adiciona produtos ao carrinho (persistido no `localStorage`).
+5. No checkout, o frontend envia os dados do pedido para o backend.
+6. Usuário acompanha histórico e detalhes dos pedidos nas rotas `/order` e `/order/:id`.
+
+## Observações importantes
+
+- Este projeto depende **obrigatoriamente** da API do backend para autenticação, produtos e pedidos.
+- Para desenvolvimento local completo, execute backend e frontend **simultaneamente** em terminais diferentes.
+- O backend deve estar rodando na porta `3000` (padrão) ou ajuste `VITE_API_URL` no `.env`.
+- O carrinho é persistido localmente via `localStorage` - não é sincronizado entre dispositivos.
