@@ -24,7 +24,7 @@ Este frontend implementa os fluxos principais de uma loja online:
 
 ## Pré-requisitos
 
-- Node.js 22+
+- Node.js 24+
 - pnpm
 - Backend da API em execução (veja o README do backend)
 

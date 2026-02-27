@@ -8,7 +8,7 @@ Confira o detalhamento arquitetural em: [ARCHITECTURE.md](./ARCHITECTURE.md)
 
 ### Pré-requisitos
 
-- [Node.js](https://nodejs.org/) (versão 22+)
+- [Node.js](https://nodejs.org/) (versão 24+)
 - [pnpm](https://pnpm.io/)
 - [Docker](https://www.docker.com/) e Docker Compose
 
