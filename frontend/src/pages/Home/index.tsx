@@ -25,16 +25,16 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 ">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 md:mb-12 border-b border-gray-100 pb-8">
           <div className="flex-1">
-            <h2 className="text-blue-600 font-bold text-sm uppercase tracking-widest mb-2">
+            <h2 className="fg--primary font-bold text-sm uppercase tracking-widest mb-2">
               Novidades
             </h2>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-extrabold fg--background-contrast leading-tight">
               Produtos em Destaque
             </h1>
-            <p className="text-gray-500 mt-4 text-lg max-w-2xl leading-relaxed">
+            <p className="fg--background-contrast mt-4 text-lg max-w-2xl leading-relaxed">
               Confira nossa seleção exclusiva.
             </p>
           </div>
@@ -55,7 +55,7 @@ export default function Home() {
             <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 ">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

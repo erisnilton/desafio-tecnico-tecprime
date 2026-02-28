@@ -47,7 +47,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <UiBtn
             onClick={() => addToCart(product)}
-            className="w-full py-3 rounded-xl text-sm font-bold shadow-md transition-all flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-lg text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 hover:scale-105"
           >
             <ShoppingCart size={18} />
             Adicionar ao carrinho
