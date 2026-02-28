@@ -18,7 +18,7 @@ export default function Navbar() {
   console.log(user);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm transition-all duration-300">
+    <nav className="sticky top-0 z-50 bg-background border-b border-gray-100 shadow-sm transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo Section */}
@@ -26,10 +26,10 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2 shrink-0 cursor-pointer group hover:opacity-80 transition-opacity"
           >
-            <div className="bg-blue-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center text-blue-600 group-hover:bg-blue-200 transition-colors shadow-sm">
-              <Store size={22} />
+            <div className="bg-primary p-2 rounded-lg w-10 h-10 flex items-center justify-center text-blue-600 group-hover:bg-primary/80 transition-colors shadow-sm">
+              <Store size={36} />
             </div>
-            <span className="text-gray-900 font-bold text-xl tracking-tight hidden md:block">
+            <span className="fg--primary font-bold text-xl tracking-tight hidden md:block">
               Sua Loja
             </span>
           </Link>
@@ -50,7 +50,7 @@ export default function Navbar() {
             {/* Cart Icon */}
             <Link
               to="/cart"
-              className="relative p-2 text-gray-700 hover:bg-gray-100 rounded-full transition-all cursor-pointer group active:scale-90"
+              className="relative p-2 fg--primary hover:bg-primary/10 rounded-full transition-all cursor-pointer group active:scale-90"
             >
               <ShoppingCart
                 size={22}
@@ -64,7 +64,7 @@ export default function Navbar() {
             </Link>
                   <Link
               to="/order"
-              className="font-medium text-gray-600 hover:text-primary transition-colors py-2"
+              className="font-medium fg--primary hover:bg-primary/10 transition-colors py-2"
             >
               Minhas Compras
             </Link>
@@ -85,7 +85,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={logout}
-                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all group"
+                  className="p-2 fg--primary hover:bg-primary/10 rounded-full transition-all group"
                   title="Sair"
                 >
                   <LogOut
@@ -96,7 +96,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link to="/login">
-                <UiBtn className="hidden sm:flex bg-blue-600 hover:text-white px-6 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-blue-700 transition-all active:scale-95">
+                <UiBtn className="hidden sm:flex bg-primary fg--primary px-6 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-primary/90 transition-all active:scale-95">
                   Entrar
                 </UiBtn>
               </Link>
@@ -125,11 +125,11 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white animate-fade-in-down p-4">
+        <div className="md:hidden border-t border-gray-100 bg-primary animate-fade-in-down p-4">
           <div className="flex flex-col gap-3">
             <Link
               to="/order"
-              className="font-medium text-gray-600 hover:text-primary transition-colors py-2"
+              className="font-medium fg--primary hover:bg-primary/10 transition-colors py-2"
             >
               Minhas Compras
             </Link>
@@ -148,17 +148,18 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={logout}
-                  className="flex items-center gap-2 text-sm font-bold text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition-all"
+                  className="flex items-center gap-2 text-sm font-bold fg--primary hover:bg-primary/10 px-3 py-2 rounded-lg transition-all"
                 >
                   <LogOut size={16} />
                   Sair
                 </button>
               </div>
             ) : (
-              <div className="pt-2 border-t border-gray-50">
-                <UiBtn className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-bold shadow-md">
+              <div className="pt-2 border-t border-gray-50 flex items-center justify-center">
+                <Link to="/login" className="w-full bg-primary fg--primary py-2 rounded-lg text-sm font-bold shadow-md flex items-center justify-center gap-2">
+                  <LogOut size={16} />
                   Entrar
-                </UiBtn>
+                </Link>
               </div>
             )}
           </div>
