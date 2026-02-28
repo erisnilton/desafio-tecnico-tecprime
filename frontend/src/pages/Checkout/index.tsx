@@ -94,21 +94,21 @@ export default function Checkout() {
     return (
       <DefaultLayout>
         <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
-          <div className="bg-green-50 p-8 rounded-full mb-6">
+          <div className="bg--background p-8 rounded-full mb-6">
             <CheckCircle2
               size={64}
-              className="text-green-500 animate-bounce-in"
+              className="fg--success animate-bounce-in"
             />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl font-bold fg--background-contrast mb-2">
             Pedido Realizado com Sucesso!
           </h2>
-          <p className="text-gray-500 mb-8 max-w-sm">
+          <p className="fg--background-contrast/50 mb-8 max-w-sm">
             Obrigado pela sua compra, <strong>{submittedData.name}</strong>. Um
             e-mail de confirmação foi enviado para {submittedData.email}.
           </p>
           <Link to="/">
-            <UiBtn className="bg-blue-600 hover:text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition-all">
+            <UiBtn className="bg--primary/80 hover:text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg--primary transition-all">
               Voltar para a página inicial
             </UiBtn>
           </Link>
@@ -125,7 +125,7 @@ export default function Checkout() {
             Seu carrinho está vazio
           </h2>
           <Link to="/">
-            <UiBtn className="bg-blue-600 hover:text-white px-8 py-3 rounded-xl font-bold">
+            <UiBtn className="bg--primary hover:fg--primary-constrat px-8 py-3 rounded-xl font-bold">
               Explorar Produtos
             </UiBtn>
           </Link>
@@ -140,11 +140,11 @@ export default function Checkout() {
         <div className="flex items-center gap-4 mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
+            className="p-2 hover:bg--primary/10 rounded-full transition-colors fg--primary/80 hover:fg--primary"
           >
             <ArrowLeft size={24} />
           </button>
-          <h1 className="text-3xl font-extrabold text-gray-900">Checkout</h1>
+          <h1 className="title-display-2 font-extrabold fg--background-contrast">Checkout</h1>
         </div>
 
         <form
@@ -156,17 +156,17 @@ export default function Checkout() {
             {/* Personal Info */}
             <section>
               <div className="flex items-center gap-3 mb-6">
-                <div className="bg-blue-50 p-2 rounded-lg text-blue-600">
+                <div className="bg--primary p-2 rounded-lg fg--primary-contrast">
                   <CheckCircle2 size={20} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">
+                <h2 className="text-xl font-bold fg--background-contrast">
                   Informações de Entrega
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg--surface p-8 rounded-3xl border border-gray-100 shadow-sm">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold fg--surface-constrast mb-2">
                     Nome Completo
                   </label>
                   <UiInput
@@ -176,7 +176,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold fg--surface-contrast mb-2">
                     E-mail
                   </label>
                   <UiInput
@@ -187,7 +187,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold fg--surface-contrast mb-2">
                     Endereço
                   </label>
                   <UiInput
@@ -202,10 +202,10 @@ export default function Checkout() {
             {/* Payment Method */}
             <section>
               <div className="flex items-center gap-3 mb-6">
-                <div className="bg-blue-50 p-2 rounded-lg text-blue-600">
-                  <CreditCard size={20} />
+                <div className="bg--primary p-2 rounded-lg fg--background-contrast">
+                  <CreditCard size={20} className="fg--primary-contrast" />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">
+                <h2 className="text-xl font-bold fg--background-contrast">
                   Forma de Pagamento
                 </h2>
               </div>
@@ -254,9 +254,9 @@ export default function Checkout() {
               </div>
 
               {paymentMethod === PaymentMethodEnum.CREDIT_CARD && (
-                <div className="mt-6 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm grid grid-cols-2 gap-6 animate-fade-in">
+                <div className="mt-6 bg--surface p-8 rounded-3xl border border-gray-100 shadow-sm grid grid-cols-2 gap-6 animate-fade-in">
                   <div className="col-span-2">
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                    <label className="block text-sm font-bold fg--surface-constrat mb-2">
                       Número do Cartão
                     </label>
                     <UiInput
@@ -265,13 +265,13 @@ export default function Checkout() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                    <label className="block text-sm font-bold fg--surface-constrat mb-2">
                       Validade
                     </label>
                     <UiInput {...register("expiry")} placeholder="MM/AA" />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                    <label className="block text-sm font-bold fg--surface-constrat mb-2">
                       CVV
                     </label>
                     <UiInput {...register("cvv")} placeholder="000" />
@@ -283,8 +283,8 @@ export default function Checkout() {
 
           {/* Summary Column */}
           <div className="lg:col-span-1">
-            <div className="bg-white border border-gray-100 p-8 rounded-3xl shadow-xl sticky top-24 space-y-8">
-              <h2 className="text-xl font-bold text-gray-900 pb-4 border-b border-gray-50">
+            <div className="bg--surface border border-gray-100 p-8 rounded-3xl shadow-xl sticky top-24 space-y-8">
+              <h2 className="text-xl font-bold fg--surface-constrat pb-4 border-b border-gray-50">
                 Resumo da Compra
               </h2>
 
@@ -301,12 +301,12 @@ export default function Checkout() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-gray-800 truncate">
+                      <p className="text-sm font-bold fg--surface-constrat truncate">
                         {item.product.title}
                       </p>
                       <p className="text-xs text-gray-400">{item.quantity}x</p>
                     </div>
-                    <p className="text-sm font-bold text-gray-900">
+                    <p className="text-sm font-bold fg--surface-constrat">
                       {(item.product.price * item.quantity).toLocaleString(
                         "pt-BR",
                         { style: "currency", currency: "BRL" },
@@ -317,7 +317,7 @@ export default function Checkout() {
               </div>
 
               <div className="space-y-3 pt-4 border-t border-gray-50">
-                <div className="flex justify-between text-gray-500 text-sm">
+                <div className="flex justify-between fg--surface-constrat text-sm">
                   <span>Subtotal ({totalItems} itens)</span>
                   <span>
                     {totalPrice.toLocaleString("pt-BR", {
@@ -326,7 +326,7 @@ export default function Checkout() {
                     })}
                   </span>
                 </div>
-                <div className="flex justify-between text-gray-900 text-xl font-black pt-2">
+                <div className="flex justify-between fg--surface-constrat text-xl font-black pt-2">
                   <span>Total</span>
                   <span>
                     {totalPrice.toLocaleString("pt-BR", {
@@ -340,7 +340,7 @@ export default function Checkout() {
               <UiBtn
                 type="submit"
                 disabled={isProcessing}
-                className="w-full bg-blue-600 hover:text-white py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 bg--primary hover:bg--primary/90 hover:text-white shadow-lg"
               >
                 {isProcessing ? (
                   <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
