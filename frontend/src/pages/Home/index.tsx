@@ -5,9 +5,12 @@ import DefaultLayout from "../../layout/default";
 import type { Product } from "../../services/product/product.model";
 import { ProductService } from "../../services/product/productService";
 
+type SortOption = "recent" | "price-asc" | "price-desc";
+
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortBy] = useState<SortOption>("recent");
   const { searchTerm } = useSearch();
 
   useEffect(() => {
@@ -26,18 +29,35 @@ export default function Home() {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    if (!searchTerm.trim()) {
-      return products;
+    let filtered = products;
+
+    // Aplicar busca
+    if (searchTerm.trim()) {
+      const lowerSearchTerm = searchTerm.toLowerCase();
+      filtered = products.filter(
+        (product) =>
+          product.title.toLowerCase().includes(lowerSearchTerm) ||
+          product.description.toLowerCase().includes(lowerSearchTerm) ||
+          product.category.toLowerCase().includes(lowerSearchTerm)
+      );
     }
 
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    return products.filter(
-      (product) =>
-        product.title.toLowerCase().includes(lowerSearchTerm) ||
-        product.description.toLowerCase().includes(lowerSearchTerm) ||
-        product.category.toLowerCase().includes(lowerSearchTerm)
-    );
-  }, [products, searchTerm]);
+    // Aplicar ordenação
+    const sorted = [...filtered];
+    switch (sortBy) {
+      case "recent":
+        // Mais recentes primeiro (assumindo que ID maior = mais recente)
+        return sorted.sort((a, b) => b.id - a.id);
+      case "price-asc":
+        // Menor preço primeiro
+        return sorted.sort((a, b) => a.price - b.price);
+      case "price-desc":
+        // Maior preço primeiro
+        return sorted.sort((a, b) => b.price - a.price);
+      default:
+        return sorted;
+    }
+  }, [products, searchTerm, sortBy]);
 
   return (
     <DefaultLayout>
@@ -59,9 +79,14 @@ export default function Home() {
             <span className="text-sm font-medium text-gray-400">
               Filtrar por:
             </span>
-            <select className="bg-gray-50 border border-gray-100 rounded-lg px-3 py-2 text-sm font-semibold text-gray-600 outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400">
-              <option>Mais recentes</option>
-              <option>Preço (Menor-Maior)</option>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortOption)}
+              className="bg-gray-50 border border-gray-100 rounded-lg px-3 py-2 text-sm font-semibold text-gray-600 outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+            >
+              <option value="recent">Mais recentes</option>
+              <option value="price-asc">Preço (Menor → Maior)</option>
+              <option value="price-desc">Preço (Maior → Menor)</option>
             </select>
           </div>
         </div>
