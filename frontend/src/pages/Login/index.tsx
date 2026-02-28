@@ -50,27 +50,27 @@ export default function Login() {
           <div className="text-center mb-10">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors mb-6"
+              className="inline-flex items-center gap-2 text-sm font-bold fg--foreground/80  transition-colors mb-6"
             >
               <ArrowLeft size={16} />
               Voltar para a loja
             </Link>
-            <div className="bg-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-100 mx-auto mb-6">
-              <Store size={32} className="text-white" />
+            <div className="bg--primary w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl mx-auto mb-6">
+              <Store size={32} className="fg--primary-contrast" />
             </div>
-            <h1 className="text-3xl font-black text-gray-900">
+            <h1 className="title-display font-bold fg--background-contrast">
               Bem-vindo de volta!
             </h1>
-            <p className="text-gray-500 mt-2">
+            <p className="text-body fg--background-contrast/80  mt-2">
               Entre com suas credenciais para continuar.
             </p>
           </div>
 
           {/* Form Card */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50">
+          <div className="bg--surface p-8 rounded-3xl border border-gray-100  shadow-gray-200/50">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">
+                <label className="block text-sm font-bold fg--background-contrast mb-2">
                   Usuário
                 </label>
                 <UiInput
@@ -82,7 +82,7 @@ export default function Login() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">
+                <label className="block text-sm font-bold fg--background-contrast mb-2">
                   Senha
                 </label>
                 <UiInput
@@ -97,7 +97,7 @@ export default function Login() {
               <UiBtn
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-blue-600 hover:text-white py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg--primary py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
