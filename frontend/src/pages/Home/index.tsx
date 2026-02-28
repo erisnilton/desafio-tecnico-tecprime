@@ -1,12 +1,14 @@
-import DefaultLayout from "../../layout/default";
+import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../../components/ProductCard";
-import { useEffect, useState } from "react";
-import { ProductService } from "../../services/product/productService";
+import { useSearch } from "../../contexts/SearchContext";
+import DefaultLayout from "../../layout/default";
 import type { Product } from "../../services/product/product.model";
+import { ProductService } from "../../services/product/productService";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { searchTerm } = useSearch();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -22,6 +24,20 @@ export default function Home() {
 
     loadProducts();
   }, []);
+
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm.trim()) {
+      return products;
+    }
+
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return products.filter(
+      (product) =>
+        product.title.toLowerCase().includes(lowerSearchTerm) ||
+        product.description.toLowerCase().includes(lowerSearchTerm) ||
+        product.category.toLowerCase().includes(lowerSearchTerm)
+    );
+  }, [products, searchTerm]);
 
   return (
     <DefaultLayout>
@@ -56,13 +72,13 @@ export default function Home() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 ">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         )}
 
-        {!isLoading && products.length === 0 && (
+        {!isLoading && filteredProducts.length === 0 && (
           <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
             <p className="text-gray-400 font-medium">
               Nenhum produto encontrado.

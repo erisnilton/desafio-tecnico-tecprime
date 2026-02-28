@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
+import { useSearch } from "../../contexts/SearchContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import UiInput from "../ui/UIInput";
 import UiAvatar from "../ui/UiAvatar";
@@ -22,6 +23,7 @@ type ThemeMode = "light" | "dark";
 export default function Navbar() {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
+  const { searchTerm, setSearchTerm } = useSearch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [theme, setTheme] = useLocalStorage<ThemeMode>("theme", "light");
 
@@ -59,7 +61,12 @@ export default function Navbar() {
           {/* Search Bar - Desktop and Tablet (>= md) */}
           <div className="hidden md:flex flex-1 max-w-xl mx-4">
             <div className="relative w-full">
-              <UiInput placeholder="Buscar na loja..." type="text" />
+              <UiInput
+                placeholder="Buscar na loja..."
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
               <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
                 <Search size={18} />
               </div>
@@ -154,7 +161,12 @@ export default function Navbar() {
         {/* Mobile Search Row - Visible only on small/medium screens (< md) */}
         <div className="pb-4 md:hidden">
           <div className="relative w-full">
-            <UiInput placeholder="Buscar na loja..." type="text" />
+            <UiInput
+              placeholder="Buscar na loja..."
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
               <Search size={18} />
             </div>
