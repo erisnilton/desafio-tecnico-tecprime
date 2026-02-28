@@ -1,9 +1,9 @@
-import DefaultLayout from "../../layout/default";
 import { useEffect, useState } from "react";
-import { OrderService } from "../../services/order/orderService";
-import type { OrderResponse } from "../../services/order/order.model";
-import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import DefaultLayout from "../../layout/default";
+import type { OrderResponse } from "../../services/order/order.model";
+import { OrderService } from "../../services/order/orderService";
 
 export default function Order() {
   const [orders, setOrders] = useState<OrderResponse[]>([]);
@@ -76,18 +76,43 @@ export default function Order() {
     }
   }
 
+  function formatCurrency(value: string) {
+    return Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(Number(value));
+  }
+
+  function formatDate(date: string) {
+    return new Date(date).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  }
+
   return (
     <DefaultLayout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 md:mb-12 border-b border-gray-100 pb-8">
           <div className="flex-1">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-extrabold fg--background-contrast leading-tight">
               Meus Pedidos
             </h1>
-            <p className="text-gray-500 mt-4 text-lg max-w-2xl leading-relaxed">
-              Confira o status dos seus pedidos
+            <p className="fg--background-contrast/70 mt-4 text-lg max-w-2xl leading-relaxed">
+              Acompanhe o status e os detalhes de cada compra.
             </p>
           </div>
+          {!isLoading && (
+            <div className="bg--surface border border-gray-100 rounded-xl px-4 py-3 shadow-sm self-start md:self-end">
+              <p className="text-xs uppercase tracking-wide fg--background-contrast/60">
+                Total
+              </p>
+              <p className="text-xl font-bold fg--background-contrast">
+                {orders.length} pedido{orders.length === 1 ? "" : "s"}
+              </p>
+            </div>
+          )}
         </div>
 
         {isLoading ? (
@@ -95,32 +120,55 @@ export default function Order() {
             <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white grid grid-cols-2 gap-4 rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all flex flex-col"
+                className="bg--surface rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all flex flex-col gap-5"
               >
-                  <h3 className="text-lg font-bold text-gray-900">
+                <div>
+                  <p className="text-xs uppercase tracking-wide fg--background-contrast/50 mb-2">
+                    Pedido #{order.code}
+                  </p>
+                  <h3 className="text-lg font-bold fg--background-contrast line-clamp-2">
                     {order.name}
                   </h3>
-                <div className="flex items-center justify-between mb-4 gap-2">
-                  <span className={`text-sm font-medium text-white px-2 py-1 rounded-md ${getPaymentMethodColor(order.payment_method)}`}>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className={`text-xs font-semibold text-white px-2.5 py-1 rounded-md ${getPaymentMethodColor(order.payment_method)}`}
+                  >
                     {getPaymentMethodText(order.payment_method)}
                   </span>
-                  <span className={`text-sm font-medium text-white px-2 py-1 rounded-md ${getColorByStatus(order.status)}`}>
+                  <span
+                    className={`text-xs font-semibold text-white px-2.5 py-1 rounded-md ${getColorByStatus(order.status)}`}
+                  >
                     {getStatusText(order.status)}
                   </span>
                 </div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-md font-bold text-gray-900">
-                    {Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(Number(order.total))}
-                  </span>
+
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="fg--background-contrast/60">Data</span>
+                    <span className="font-medium fg--background-contrast">
+                      {formatDate(order.created_at)}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="fg--background-contrast/60">Total</span>
+                    <span className="text-lg font-bold fg--background-contrast">
+                      {formatCurrency(order.total)}
+                    </span>
+                  </div>
                 </div>
-                <Link className="bg-blue-100 px-2 py-1 rounded-md w-full text-center" to={`/order/${order.id}`}>Ver</Link>
+
+                <Link
+                  className="mt-auto w-full text-center bg--primary/10 fg--primary font-semibold px-4 py-2.5 rounded-xl hover:bg--primary/20 transition-colors"
+                  to={`/order/${order.id}`}
+                >
+                  Ver detalhes
+                </Link>
               </div>
             ))}
           </div>

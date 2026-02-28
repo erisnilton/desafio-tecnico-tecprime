@@ -22,6 +22,7 @@ export type UpdateOrderInput = Partial<CreateOrderInput & { id: string }>;
 
 export interface OrderResponse {
   id: string;
+  code: string;
   name: string;
   email: string;
   address: string;
