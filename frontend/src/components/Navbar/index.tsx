@@ -25,8 +25,8 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2 shrink-0 cursor-pointer group hover:opacity-80 transition-opacity"
           >
-            <div className="bg-primary p-2 rounded-lg w-10 h-10 flex items-center justify-center text-blue-600 group-hover:bg-primary/80 transition-colors shadow-sm">
-              <Store size={36} />
+            <div className="bg--primary p-2 rounded-lg w-10 h-10 flex items-center justify-center text-blue-600 group-hover:bg-primary/80 transition-colors shadow-sm">
+              <Store size={36} className="fg--primary-contrast" />
             </div>
             <span className="fg--primary font-bold text-xl tracking-tight hidden md:block">
               Sua Loja
@@ -49,7 +49,7 @@ export default function Navbar() {
             {/* Cart Icon */}
             <Link
               to="/cart"
-              className="relative p-2 fg--primary hover:bg-primary/10 rounded-full transition-all cursor-pointer group active:scale-90"
+              className="relative p-2 fg--primary hover:bg--primary/10 rounded-full transition-all cursor-pointer group active:scale-90"
             >
               <ShoppingCart
                 size={22}
@@ -78,7 +78,7 @@ export default function Navbar() {
                       user.picture_url || "https://github.com/placeholder.png"
                     }
                   />
-                  <span className="text-base font-semibold text-gray-700 tracking-wider">
+                  <span className="text-base font-semibold fg--primary tracking-wider">
                     {user.full_name}
                   </span>
                 </div>

@@ -42,29 +42,37 @@ export default defineConfig({
         },
         dark: {
           colors: {
-            background: "#12100E", // Fundo principal escuro
-            "background-contrast": "#FFFFFF", // Texto sobre fundo escuro
-            foreground: "#F0EAE4", // Texto principal em fundo escuro
-            "foreground-contrast": "#000000", // Texto em áreas claras (ex: cards)
+            background: "#0F172A", // Fundo principal escuro (slate-900)
+            "background-contrast": "#F3F4F6", // Texto principal claro
+
+            foreground: "#6366F1", // Roxo principal levemente mais vivo no dark
+            "foreground-contrast": "#FFFFFF",
 
             // Cores principais
-            primary: "#A88B73", // Versão clara do marrom original
-            "primary-contrast": "#000000",
-            secondary: "#E39B56", // Um laranja mais suave e visível no escuro
-            "secondary-contrast": "#000000",
-            accent: "#53CFF0", // Azul vibrante no escuro
-            "accent-contrast": "#000000",
-            surface: "#1C1A18", // Cartões, modais etc.
+            primary: "#6366F1", // Mantém identidade, mais vibrante no dark
+            "primary-contrast": "#FFFFFF",
+
+            secondary: "#1F2937", // Cinza escuro para elementos secundários
+            "secondary-contrast": "#F3F4F6",
+
+            accent: "#818CF8", // Acento mais claro para destacar no fundo escuro
+            "accent-contrast": "#0F172A",
+
+            surface: "#111827", // Cards, modais
+            "surface-2": "#1E293B", // Fundo secundário levemente elevado
 
             // Cores de contexto
-            danger: "#E15B64",
-            "danger-contrast": "#000000",
-            warning: "#FFD25C",
-            "warning-contrast": "#000000",
-            info: "#5AB1E8",
-            "info-contrast": "#000000",
-            success: "#55D88B",
-            "success-contrast": "#000000",
+            danger: "#F87171", // Vermelho mais suave para dark
+            "danger-contrast": "#111827",
+
+            warning: "#FBBF24",
+            "warning-contrast": "#111827",
+
+            info: "#60A5FA",
+            "info-contrast": "#111827",
+
+            success: "#4ADE80",
+            "success-contrast": "#111827",
           },
         },
       },
