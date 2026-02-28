@@ -1,27 +1,27 @@
-import { useState } from "react";
-import DefaultLayout from "../../layout/default";
-import { useCart } from "../../contexts/CartContext";
-import { useAuth } from "../../contexts/AuthContext";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  CreditCard,
-  QrCode,
-  FileText,
-  CheckCircle2,
   ArrowLeft,
+  CheckCircle2,
+  CreditCard,
+  FileText,
+  QrCode,
   ShieldCheck,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import z from "zod";
 import UiBtn from "../../components/ui/UiBtn";
 import UiInput from "../../components/ui/UIInput";
-import { OrderService } from "../../services/order/orderService";
+import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
+import DefaultLayout from "../../layout/default";
 import {
   PaymentMethod as PaymentMethodEnum,
   type CreateOrderInput,
 } from "../../services/order/order.model";
+import { OrderService } from "../../services/order/orderService";
 
 const checkoutSchema = z.object({
   name: z.string().min(1, "Campo obrigatório"),
@@ -108,7 +108,7 @@ export default function Checkout() {
             e-mail de confirmação foi enviado para {submittedData.email}.
           </p>
           <Link to="/">
-            <UiBtn className="bg--primary/80 hover:text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg--primary transition-all">
+            <UiBtn className="bg--primary/80 fg--primary-contrast px-8 py-3 rounded-xl font-bold shadow-lg hover:bg--primary transition-all">
               Voltar para a página inicial
             </UiBtn>
           </Link>
@@ -125,7 +125,7 @@ export default function Checkout() {
             Seu carrinho está vazio
           </h2>
           <Link to="/">
-            <UiBtn className="bg--primary hover:fg--primary-constrat px-8 py-3 rounded-xl font-bold">
+            <UiBtn className="bg--primary fg--primary-contrast px-8 py-3 rounded-xl font-bold hover:bg--primary/90 transition-colors">
               Explorar Produtos
             </UiBtn>
           </Link>
@@ -340,7 +340,7 @@ export default function Checkout() {
               <UiBtn
                 type="submit"
                 disabled={isProcessing}
-                className="w-full py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 bg--primary hover:bg--primary/90 hover:text-white shadow-lg"
+                className="w-full py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 bg--primary fg--primary-contrast hover:bg--primary/90 shadow-lg"
               >
                 {isProcessing ? (
                   <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />

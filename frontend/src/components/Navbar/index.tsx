@@ -1,19 +1,42 @@
-import { LogOut, Menu, Search, ShoppingCart, Store, X } from "lucide-react";
-import { useState } from "react";
+import {
+  Lightbulb,
+  LogOut,
+  Menu,
+  Search,
+  ShoppingCart,
+  Store,
+  Sun,
+  X,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import UiInput from "../ui/UIInput";
 import UiAvatar from "../ui/UiAvatar";
 import UiBtn from "../ui/UiBtn";
+
+type ThemeMode = "light" | "dark";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useLocalStorage<ThemeMode>("theme", "light");
+
+  useEffect(() => {
+    const body = document.body;
+    body.classList.remove("theme-light", "theme-dark");
+    body.classList.add(theme === "dark" ? "theme-dark" : "theme-light");
+  }, [theme]);
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleThemeToggle = () => {
+    setTheme((current) => (current === "light" ? "dark" : "light"));
   };
 
   return (
@@ -25,7 +48,7 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2 shrink-0 cursor-pointer group hover:opacity-80 transition-opacity"
           >
-            <div className="bg--primary p-2 rounded-lg w-10 h-10 flex items-center justify-center text-blue-600 group-hover:bg-primary/80 transition-colors shadow-sm">
+            <div className="bg--primary p-2 rounded-lg w-10 h-10 flex items-center justify-center text-blue-600 group-hover:bg--primary/80 transition-colors shadow-sm">
               <Store size={36} className="fg--primary-contrast" />
             </div>
             <span className="fg--primary font-bold text-xl tracking-tight hidden md:block">
@@ -45,7 +68,24 @@ export default function Navbar() {
 
           {/* Actions: Cart, Profile (Desktop), Menu (Mobile) */}
           <div className="flex items-center gap-1 md:gap-3">
-        
+            <button
+              type="button"
+              onClick={handleThemeToggle}
+              className="p-2 fg--primary hover:bg--primary/10 rounded-full transition-all cursor-pointer"
+              title={
+                theme === "light"
+                  ? "Mudar para tema escuro"
+                  : "Mudar para tema claro"
+              }
+              aria-label={
+                theme === "light"
+                  ? "Ativar tema escuro"
+                  : "Ativar tema claro"
+              }
+            >
+              {theme === "light" ? <Sun size={20} /> : <Lightbulb size={20} />}
+            </button>
+
             {/* Cart Icon */}
             <Link
               to="/cart"
@@ -61,9 +101,9 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
-                  <Link
+            <Link
               to="/order"
-              className="font-medium fg--primary hover:bg-primary/10 transition-colors py-2"
+              className="font-medium fg--primary transition-colors py-2"
             >
               Minhas Compras
             </Link>
@@ -84,7 +124,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={logout}
-                  className="p-2 fg--primary hover:bg-primary/10 rounded-full transition-all group"
+                  className="p-2 fg--primary hover:bg--primary/10 rounded-full transition-all group"
                   title="Sair"
                 >
                   <LogOut
@@ -95,7 +135,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link to="/login">
-                <UiBtn className="hidden sm:flex bg-primary fg--primary px-6 py-2 rounded-xl text-sm font-bold shadow-md hover:bg-primary/90 transition-all active:scale-95">
+                <UiBtn className="hidden sm:flex bg--primary fg--primary-contrast px-6 py-2 rounded-xl text-sm font-bold shadow-md hover:bg--primary/90 transition-all active:scale-95">
                   Entrar
                 </UiBtn>
               </Link>
@@ -124,11 +164,11 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-primary animate-fade-in-down p-4">
+        <div className="md:hidden border-t border-gray-100 bg--surface animate-fade-in-down p-4">
           <div className="flex flex-col gap-3">
             <Link
               to="/order"
-              className="font-medium fg--primary hover:bg-primary/10 transition-colors py-2"
+              className="font-medium fg--primary hover:bg--primary/10 transition-colors py-2"
             >
               Minhas Compras
             </Link>
@@ -147,7 +187,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={logout}
-                  className="flex items-center gap-2 text-sm font-bold fg--primary hover:bg-primary/10 px-3 py-2 rounded-lg transition-all"
+                  className="flex items-center gap-2 text-sm font-bold fg--primary hover:bg--primary/10 px-3 py-2 rounded-lg transition-all"
                 >
                   <LogOut size={16} />
                   Sair
@@ -155,7 +195,7 @@ export default function Navbar() {
               </div>
             ) : (
               <div className="pt-2 border-t border-gray-50 flex items-center justify-center">
-                <Link to="/login" className="w-full bg-primary fg--primary py-2 rounded-lg text-sm font-bold shadow-md flex items-center justify-center gap-2">
+                <Link to="/login" className="w-full bg--primary fg--primary-contrast py-2 rounded-lg text-sm font-bold shadow-md flex items-center justify-center gap-2">
                   <LogOut size={16} />
                   Entrar
                 </Link>

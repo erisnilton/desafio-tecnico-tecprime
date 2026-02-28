@@ -45,7 +45,7 @@ export default function Cart() {
             Que tal explorar nossas ofertas?
           </p>
           <Link to="/">
-            <UiBtn className="bg--primary px-8 py-3 rounded-xl font-bold shadow-md transition-all flex items-center gap-2">
+            <UiBtn className="bg--primary fg--primary-contrast px-8 py-3 rounded-xl font-bold shadow-md transition-all flex items-center gap-2">
               <ArrowLeft size={18} />
               Voltar para a loja
             </UiBtn>
@@ -168,7 +168,7 @@ export default function Cart() {
               </div>
 
               <Link to="/checkout" className="block w-full">
-                <UiBtn className="w-full bg--primary py-4 rounded-2xl font-bold text-lg hover:bg--primary/80 hover:fg--primary-contrast transition-colors">
+                <UiBtn className="w-full bg--primary fg--primary-contrast py-4 rounded-2xl font-bold text-lg hover:bg--primary/80 transition-colors">
                   Finalizar Compra
                 </UiBtn>
               </Link>

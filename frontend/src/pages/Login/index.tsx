@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, Lock, Store, User } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import * as z from "zod";
-import { useNavigate, Link } from "react-router-dom";
-import { User, Lock, ArrowLeft, Store } from "lucide-react";
-import BlankLayout from "../../layout/blank";
 import UiBtn from "../../components/ui/UiBtn";
 import UiInput from "../../components/ui/UIInput";
 import { useAuth } from "../../contexts/AuthContext";
-import { useState } from "react";
+import BlankLayout from "../../layout/blank";
 
 const loginSchema = z.object({
   username: z.string().min(1, "O usuário é obrigatório"),
@@ -97,7 +97,7 @@ export default function Login() {
               <UiBtn
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg--primary py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg--primary fg--primary-contrast py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
